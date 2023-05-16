@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Movies = () => {
   const [keyword, setKeyword] = useState('');
@@ -33,22 +33,17 @@ const Movies = () => {
       <button onClick={handleSearch}>Search</button>
       <ul>
         {searchResults.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`}>
+              <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} /> {/* Add this line */}
+              {movie.title}
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
   );
 };
 
-Movies.propTypes = {
-  keyword: PropTypes.string.isRequired,
-  searchResults: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      // Include other expected properties and their types
-    })
-  ),
-};
 
 export default Movies;

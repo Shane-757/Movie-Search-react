@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import { useParams, Link } from 'react-router-dom';
+import Cast from 'components/Cast/Cast';
+import Reviews from 'components/Reviews/Reviews';
 
-const MovieDetails = ({ match }) => {
-  const movieId = match.params.movieId;
+const MovieDetails = () => {
+  const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
-  const [movieCredits, setMovieCredits] = useState(null);
+  const [showComponent, setShowComponent] = useState(null);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -21,53 +23,38 @@ const MovieDetails = ({ match }) => {
       }
     };
 
-    const fetchMovieCredits = async () => {
-      try {
-        const creditsResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
-          params: {
-            api_key: '64ac679b39866e67efda72c4a9b2c64c'
-          }
-        });
-        setMovieCredits(creditsResponse.data);
-      } catch (error) {
-        console.error('Error fetching movie credits:', error);
-      }
-    };
-
     fetchMovieDetails();
-    fetchMovieCredits();
   }, [movieId]);
+
+  const handleClick = (component) => {
+    setShowComponent(component);
+  };
 
   return (
     <div>
       <h2>Movie Details</h2>
-      {movieDetails && (
+      {movieDetails ? (
         <div>
+          <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={movieDetails.title} />
           <h3>{movieDetails.title}</h3>
-          <p>Release Date: {movieDetails.release_date}</p>
+          <p>User Score: {movieDetails.vote_average}</p>
           <p>Overview: {movieDetails.overview}</p>
+          <p>Genres: {movieDetails.genres.map((genre) => genre.name).join(', ')}</p>
         </div>
+      ) : (
+        <p>Loading movie details...</p>
       )}
-      {movieCredits && (
-        <div>
-          <h3>Cast</h3>
-          <ul>
-            {movieCredits.cast.map((person) => (
-              <li key={person.id}>{person.name}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div>
+        <h2>Additional Information</h2>
+        <ul>
+          <li><Link onClick={() => handleClick('cast')} to="#">Cast</Link></li>
+          <li><Link onClick={() => handleClick('reviews')} to="#">Reviews</Link></li>
+        </ul>
+        {showComponent === 'cast' && <Cast />}
+        {showComponent === 'reviews' && <Reviews />}
+      </div>
     </div>
   );
-};
-
-MovieDetails.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      movieId: PropTypes.string.isRequired
-    })
-  }).isRequired,
 };
 
 export default MovieDetails;

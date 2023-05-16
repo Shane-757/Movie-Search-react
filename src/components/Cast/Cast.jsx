@@ -1,46 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
-const Cast = ({ match }) => {
-  const movieId = match.params.movieId;
+const Cast = () => {
+  const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    const fetchMovieCast = async () => {
+    const fetchCast = async () => {
       try {
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
+        const castResponse = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
           params: {
             api_key: '64ac679b39866e67efda72c4a9b2c64c'
           }
         });
-        setCast(response.data.cast);
+        setCast(castResponse.data.cast);
       } catch (error) {
-        console.error('Error fetching movie cast:', error);
+        console.error('Error fetching cast:', error);
       }
     };
 
-    fetchMovieCast();
+    fetchCast();
   }, [movieId]);
 
   return (
     <div>
       <h2>Cast</h2>
-      <ul>
-        {cast.map((person) => (
-          <li key={person.id}>{person.name}</li>
-        ))}
-      </ul>
+      {cast.length > 0 ? (
+        <ul>
+          {cast.map((actor) => (
+            <li key={actor.id}>
+              <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
+              <p>{actor.name}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading cast...</p>
+      )}
     </div>
   );
-};
-
-Cast.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      movieId: PropTypes.string.isRequired
-    })
-  }).isRequired,
 };
 
 export default Cast;
