@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-// Import your components for the different routes
 import Home from './Home/Home';
 import Movies from './Movies/Movies';
 import MovieDetails from './MovieDetails/MovieDetails';
@@ -12,14 +11,12 @@ const App = () => {
   return (
     <Router>
       <div>
-        {/* Define your routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:movieId" element={<MovieDetails />} />
           <Route path="/movies/:movieId/cast" element={<Cast />} />
           <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-          {/* Add more routes as needed */}
         </Routes>
       </div>
     </Router>
