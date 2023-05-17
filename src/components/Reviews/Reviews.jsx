@@ -25,7 +25,7 @@ const Reviews = () => {
 
   return (
     <div>
-      <h2>Reviews</h2>
+      <h2 className="centeredContent">Reviews</h2>
       {reviews.map((review) => (
         <div key={review.id}>
           <p>{review.author}</p>

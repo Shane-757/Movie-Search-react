@@ -28,9 +28,11 @@ const Movies = () => {
 
   return (
     <div>
-      <h2>Movie Search</h2>
-      <input type="text" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
-      <button onClick={handleSearch}>Search</button>
+      <div className="centeredContent">
+        <h2>Movie Search</h2>
+        <input type="text" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+        <button onClick={handleSearch}>Search</button>
+      </div>
       <ul>
         {searchResults.map((movie) => (
           <li key={movie.id}>

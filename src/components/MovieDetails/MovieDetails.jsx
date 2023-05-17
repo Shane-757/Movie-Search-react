@@ -34,22 +34,26 @@ const MovieDetails = () => {
     <div>
       <h2>Movie Details</h2>
       {movieDetails ? (
-        <div>
+        <div className="movie-details-container">
           <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={movieDetails.title} />
-          <h3>{movieDetails.title}</h3>
-          <p>User Score: {movieDetails.vote_average}</p>
-          <p>Overview: {movieDetails.overview}</p>
-          <p>Genres: {movieDetails.genres.map((genre) => genre.name).join(', ')}</p>
+            <div className="movie-details">
+              <h3>{movieDetails.title}</h3>
+              <p>User Score: {movieDetails.vote_average}</p>
+              <p>Overview: {movieDetails.overview}</p>
+              <p>Genres: {movieDetails.genres.map((genre) => genre.name).join(', ')}</p>
+            </div>
         </div>
       ) : (
         <p>Loading movie details...</p>
       )}
       <div>
+         <div className="centeredContent">
         <h2>Additional Information</h2>
-        <ul>
+        <ul className="infoButton">
           <li><Link onClick={() => handleClick('cast')} to="#">Cast</Link></li>
           <li><Link onClick={() => handleClick('reviews')} to="#">Reviews</Link></li>
-        </ul>
+          </ul>
+          </div>
         {showComponent === 'cast' && <Cast />}
         {showComponent === 'reviews' && <Reviews />}
       </div>

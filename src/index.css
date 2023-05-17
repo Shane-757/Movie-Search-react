@@ -1,7 +1,8 @@
 @import-normalize; /* bring in normalize.css styles */
 
 body {
-  margin: 0;
+  margin: 20px;
+  /* Add a margin around the entire body */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -14,6 +15,33 @@ code {
     monospace;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav ul li {
+  margin: 0 10px;
+  width: auto;
+}
+
+.titleHeading {
+  text-align: center;
+}
+
+.centeredContent {
+  text-align: center;
+}
+
+
+
 ul {
   display: flex;
   flex-wrap: wrap;
@@ -24,13 +52,10 @@ ul {
 
 /* Styling for each movie item */
 li {
-  flex: 1 0 21%;
-  /* 21% will allow for 4 items per row, adjust as needed */
+  /*flex: 1 0 21%;*/
   margin: 1.5%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 200px;
-  /* adjust as needed */
 }
 
 li:hover {
@@ -45,9 +70,32 @@ li img {
 
 .movie-details-container {
   display: flex;
-  align-items: flex-start;
+  flex-direction: row;
 }
 
 .movie-details-container img {
+  width: 300px;
+  height: auto;
   margin-right: 20px;
+}
+
+.movie-details {
+  flex-grow: 1;
+}
+
+.Cast li img {
+  width: 100px;
+  height: auto;
+}
+
+.infoButton {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.infoButton li {
+  margin: 0 10px;
+  width: auto;
 }

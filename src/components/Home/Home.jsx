@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Popular Movies</h2>
+      <h2 className="titleHeading">Popular Movies</h2>
       <ul>
         {movies.map((movie) => (
           <li key={movie.id}>

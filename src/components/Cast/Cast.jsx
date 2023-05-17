@@ -24,8 +24,8 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Cast</h2>
+    <div className="Cast">
+      <h2 className="centeredContent">Cast</h2>
       {cast.length > 0 ? (
         <ul>
           {cast.map((actor) => (
