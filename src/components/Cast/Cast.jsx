@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -23,7 +23,7 @@ const Cast = () => {
     fetchCast();
   }, [movieId]);
 
-  return (
+ return (
     <div className="Cast">
       <h2 className="centeredContent">Cast</h2>
       {cast.length > 0 ? (
@@ -31,7 +31,7 @@ const Cast = () => {
           {cast.map((actor) => (
             <li key={actor.id}>
               <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
-              <p>{actor.name}</p>
+              <Link to={`/actor/${actor.id}`}>{actor.name}</Link>
             </li>
           ))}
         </ul>

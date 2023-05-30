@@ -26,12 +26,17 @@ const Reviews = () => {
   return (
     <div>
       <h2 className="centeredContent">Reviews</h2>
-      {reviews.map((review) => (
-        <div key={review.id}>
-          <p>{review.author}</p>
-          <p>{review.content}</p>
-        </div>
-      ))}
+      {reviews.length > 0 ? (
+        reviews.map((review) => (
+          <div key={review.id}>
+            <p>{review.author}</p>
+            <p>{review.content}</p>
+          </div>
+        ))
+      ) : (
+          <p style={{
+            textAlign: 'center', fontWeight: 'bold', fontSize: '30px'}}>No reviews available</p>
+      )}
     </div>
   );
 };
