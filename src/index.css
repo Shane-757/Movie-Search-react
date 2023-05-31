@@ -99,3 +99,14 @@ li img {
   margin: 0 10px;
   width: auto;
 }
+
+.movie-poster {
+  width: 100%;
+  max-width: 500px;
+}
+
+@media (max-width: 600px) {
+  .movie-poster {
+    max-width: 250px;
+  }
+}

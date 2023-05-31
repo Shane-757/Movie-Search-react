@@ -40,7 +40,7 @@ const MovieDetails = () => {
       <h2>Movie Details</h2>
       {movieDetails ? (
         <div className="movie-details-container">
-          <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={movieDetails.title} />
+          <img className="movie-poster" src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={movieDetails.title} />
             <div className="movie-details">
               <h3>{movieDetails.title}</h3>
               <p>User Score: {movieDetails.vote_average}</p>
