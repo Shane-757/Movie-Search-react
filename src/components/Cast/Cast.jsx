@@ -23,14 +23,19 @@ const Cast = () => {
     fetchCast();
   }, [movieId]);
 
- return (
+  return (
     <div className="Cast">
       <h2 className="centeredContent">Cast</h2>
       {cast.length > 0 ? (
         <ul>
           {cast.map((actor) => (
             <li key={actor.id}>
-              <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
+              <img 
+                src={actor.profile_path 
+                      ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` 
+                      : 'https://books.tsl.org.au/wp-content/uploads/sites/3/2015/01/NO-Image-placeholder.png'} 
+                alt={actor.name} 
+              />
               <Link to={`/actor/${actor.id}`}>{actor.name}</Link>
             </li>
           ))}

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
+import Reviews from 'components/Reviews/Reviews'
+
+const COMPONENT_NAMES = {
+  CAST: 'cast',
+  REVIEWS: 'reviews',
+};
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -50,12 +55,12 @@ const MovieDetails = () => {
          <div className="centeredContent">
         <h2>Additional Information</h2>
         <ul className="infoButton">
-          <li><Link onClick={() => handleClick('cast')} to="#">Cast</Link></li>
-          <li><Link onClick={() => handleClick('reviews')} to="#">Reviews</Link></li>
+          <li><Link onClick={() => handleClick(COMPONENT_NAMES.CAST)} to="#">Cast</Link></li>
+          <li><Link onClick={() => handleClick(COMPONENT_NAMES.REVIEWS)} to="#">Reviews</Link></li>
           </ul>
           </div>
-        {showComponent === 'cast' && <Cast />}
-        {showComponent === 'reviews' && <Reviews />}
+        {showComponent === COMPONENT_NAMES.CAST && <Cast />}
+        {showComponent === COMPONENT_NAMES.REVIEWS && <Reviews />}
       </div>
     </div>
   );

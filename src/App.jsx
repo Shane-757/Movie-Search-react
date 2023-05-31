@@ -1,12 +1,12 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Route, Routes, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, NavLink, Navigate } from 'react-router-dom';
 
-const Home = lazy(() => import('./Home/Home'));
-const Movies = lazy(() => import('./Movies/Movies'));
-const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
-const Cast = lazy(() => import('./Cast/Cast'));
-const Reviews = lazy(() => import('./Reviews/Reviews'));
-const ActorPage = lazy(() => import('./ActorPage/ActorPage')); // import ActorPage component
+const Home = lazy(() => import('./Pages/Home/Home'));
+const Movies = lazy(() => import('./Pages/Movies/Movies'));
+const MovieDetails = lazy(() => import('./Pages/MovieDetails/MovieDetails'));
+const Cast = lazy(() => import('./components/Cast/Cast'));
+const Reviews = lazy(() => import('./components/Reviews/Reviews'));
+const ActorPage = lazy(() => import('./Pages/ActorPage/ActorPage')); 
 
 const App = () => {
   return (
@@ -30,7 +30,8 @@ const App = () => {
             <Route path="/movies/:movieId" element={<MovieDetails />} />
             <Route path="/movies/:movieId/cast" element={<Cast />} />
             <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-            <Route path="/actor/:actorId" element={<ActorPage />} /> {/* use element instead of component */}
+            <Route path="/actor/:actorId" element={<ActorPage />} /> 
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>
       </div>
